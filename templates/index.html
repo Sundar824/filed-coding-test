@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+        <div class="padding">
+            <div class="row">
+                <div class="container-fluid d-flex justify-content-center" style="margin-top: 110;">
+
+                    <div class="col-sm-8 col-md-6" style="margin-left: 240;">
+                        <div class="card">
+
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6"> <span>CREDIT/DEBIT CARD PAYMENT</span> </div>
+                                    <div class="col-md-6 text-right" style="margin-top: -5px;"> <img src="https://img.icons8.com/color/36/000000/visa.png"> <img src="https://img.icons8.com/color/36/000000/mastercard.png"> <img src="https://img.icons8.com/color/36/000000/amex.png"> </div>
+                                </div>
+                            </div>
+
+                            <div class="card-body" style="height: 350px">
+
+                                <!-- Card Number -->
+                                <div class="form-group">
+                                    <label for="cc-number" class="control-label">CARD NUMBER</label>
+                                    <input id="cc-number" type="tel" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required >
+                                </div>
+
+                                <!-- Expiry Data and CVC Number -->
+                                <div class="row">
+                                    <!-- Expiry Date -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="cc-exp" class="control-label">CARD EXPIRY</label>
+                                            <input id="cc-exp" type="tel" class="input-lg form-control cc-exp" autocomplete="cc-exp" placeholder="•• / ••" required>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card CVC Number -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="cc-cvc" class="control-label">CARD CVC</label>
+                                            <input id="cc-cvc" type="tel" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="••••" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card Holder Name -->
+                                <div class="form-group">
+                                    <label for="numeric" class="control-label">CARD HOLDER NAME</label>
+                                    <input type="text" class="input-lg form-control" id="card-holder-name">
+                                </div>
+
+                                <!-- Payment Amount -->
+                                <div class="form-group">
+                                    <label for="numeric" class="control-label">Payment Amount</label>
+                                    <input type="text" class="input-lg form-control" id="payment">
+                                </div>
+
+                                <!-- Payment Button -->
+                                <div class="form-group">
+                                    <input value="MAKE PAYMENT" type="button" class="btn btn-success btn-lg form-control" style="font-size: .8rem;" id="pay-btn">
+                                </div>
+                                <p id="message">Response will appear hear</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <script>
+            $(document).ready(function(){
+                $("#pay-btn").click(function(){
+
+                    var cc_number = $("#cc-number").val();
+                    var cc_card_name = $("#card-holder-name").val();
+                    var cc_exp = $("#cc-exp").val();
+                    var cc_cvc = $("#cc-cvc").val();
+                    var cc_amount = $("#payment").val();
+
+                    var data = {
+                        "CreditCardNumber": cc_number,
+                        "CardHolder": cc_card_name,
+                        "ExpirationDate": cc_exp,
+                        "SecurityCode": cc_cvc,
+                        "Amount": cc_amount
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:500/payment/process",
+                        data : JSON.stringify(data),
+                        contentType: "application/json",
+                    }).done(function(data){
+                        console.log(data.Message);
+                        console.log(data);
+                        $("#message").html(JSON.stringify(data));
+                    }).fail(function(data){
+                        console.log(data.responseJSON.Message);
+                        $("#message").html(JSON.stringify(data.responseJSON));
+                    });
+                });
+            });
+        </script>
+
+    </body>
+</html>

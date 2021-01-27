@@ -1,4 +1,4 @@
-# filed-coding-test
+# Filed Coding Test
 
 I have done this test with three different type of payment gateways
 
@@ -20,20 +20,20 @@ All the APIs are using payment gateway "API integration". Not the SDK.
 
 Parameters for sample API calls
 
-{
+    {
+       "CreditCardNumber": "6069980100503646",
+       "CardHolder": "Mano",
+       "ExpirationDate": "10/2021",
+       "SecurityCode":"324",
+       "Amount": "50"
+    }
 
-    "CreditCardNumber": "6069980100503646",
-    "CardHolder": "Mano",
-    "ExpirationDate": "10/2021",
-    "SecurityCode":"324",
-    "Amount": "50"
-}
+pleas pull the code and run the PaymentProcess.py file 
+with below command.
 
-pleas pull the code and run the PaymentProcess.py file
+    python PaymentProcess.py
 
-    https://localhost:500/
-
-The above link will redirect you to sample credit card validation
-page.
+The link https://localhost:500 will redirect you to sample page for 
+payment process.
 
 Thanks!!..

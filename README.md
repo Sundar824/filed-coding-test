@@ -29,7 +29,7 @@ Parameters for sample API calls
     "Amount": "50"
 }
 
-pleas pull the code and run 
+pleas pull the code and run the PaymentProcess.py file
 
     https://localhost:500/
 

@@ -1,7 +1,4 @@
-from flask import Flask, jsonify, request, make_response, url_for, render_template, session
-import json
-import requests
-from requests.auth import HTTPBasicAuth
+from flask import Flask, jsonify, request, make_response, render_template
 import datetime
 import traceback
 import PaymentGateways
@@ -46,8 +43,11 @@ def ProcessPayment():
 
     present_date = datetime.datetime.now().date()
     if ExpirationDate or ExpirationDate != '':
-        ExpirationDate = datetime.datetime.strptime(ExpirationDate, "%m/%Y").date()
-        print(ExpirationDate)
+        try:
+            ExpirationDate = datetime.datetime.strptime(ExpirationDate, "%m/%Y").date()
+        except Exception as err:
+            return make_response(
+                jsonify({'Message': 'Please Enter the Valid expiration date', 'Error': err}), 400)
     else:
         return make_response(
             jsonify({'Message': 'Please Enter Expiration Date', 'Error': 'The request is invalid'}), 400)
@@ -151,8 +151,8 @@ def ProcessPayment():
                 jsonify({'Message': '', 'Error': err}), 400)
 
 
-# Index Page for card payment
-# ---------------------------
+# Thanks page for all payments
+# ----------------------------
 @app.route('/thanks')
 def thanks():
     return 'welcome'

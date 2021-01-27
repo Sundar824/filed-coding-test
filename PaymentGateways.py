@@ -1,9 +1,5 @@
-import json
 import requests
 from requests.auth import HTTPBasicAuth
-import datetime
-import traceback
-from icecream import ic
 
 i = 0
 
@@ -46,7 +42,7 @@ def stripe():
         "success_url": "https://localhost:8080/thanks",
         "cancel_url": "https://localhost:8080/thanks",
         "payment_method_types[0]": "card",
-        "line_items[0][price]": "price_1ICfV4Bjl4ynhlDwfUr6yfaJ",
+        "line_items[0][price]": "price_1IEDOoBjl4ynhlDwWvufrlAS",
         "line_items[0][quantity]": "2",
         "mode": "payment"
     }

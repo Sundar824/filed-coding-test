@@ -47,7 +47,7 @@ def ProcessPayment():
             ExpirationDate = datetime.datetime.strptime(ExpirationDate, "%m/%Y").date()
         except Exception as err:
             return make_response(
-                jsonify({'Message': 'Please Enter the Valid expiration date', 'Error': err}), 400)
+                jsonify({'Message': 'Please Enter the Valid expiration date', 'Error': str(err)}), 400)
     else:
         return make_response(
             jsonify({'Message': 'Please Enter Expiration Date', 'Error': 'The request is invalid'}), 400)
@@ -92,7 +92,7 @@ def ProcessPayment():
 
         except Exception as err:
             return make_response(
-                jsonify({'Message': 'Something went wrong', 'Error': err, "TraceBack": traceback.format_exc()}), 400)
+                jsonify({'Message': 'Something went wrong', 'Error': str(err), "TraceBack": traceback.format_exc()}), 400)
 
     # Expensive Payment Process:
     # -------------------------
@@ -121,7 +121,7 @@ def ProcessPayment():
 
         except Exception as err:
             return make_response(
-                jsonify({'Message': 'Oops! Something went wrong with Your transaction', 'err': err}), 400)
+                jsonify({'Message': 'Oops! Something went wrong with Your transaction', 'err': str(err)}), 400)
 
     # Premium Payment Process:
     # -----------------------
@@ -140,7 +140,7 @@ def ProcessPayment():
                 if attempt == 1 or attempt == 2:
                     return make_response(
                         jsonify({'Message': 'Having trouble with Payment Process',
-                                 'Error': response}), 400)
+                                 'Error': str(response)}), 400)
 
                 else:
                     return make_response(
@@ -148,7 +148,7 @@ def ProcessPayment():
 
         except Exception as err:
             return make_response(
-                jsonify({'Message': '', 'Error': err}), 400)
+                jsonify({'Message': '', 'Error': str(err)}), 400)
 
 
 # Thanks page for all payments
